@@ -1,0 +1,4 @@
+Django==1.9
+tornado==4.3
+beautifulsoup4==4.4.1
+requests==2.8.1
