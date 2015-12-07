@@ -24,7 +24,7 @@ results = {}
 DJANGO_APPS_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def _execute(query):
-	
+
 	dbPath = 'db.sqlite3'
 	connection = sqlite3.connect(dbPath)
 	cursorobj = connection.cursor()
@@ -52,6 +52,7 @@ class Application(tornado.web.Application):
 		]
 		settings = dict(
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
+            static_path=os.path.join(os.path.dirname(__file__), "static"),
             #xsrf_cookies=True,
 
         )
