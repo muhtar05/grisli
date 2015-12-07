@@ -1,0 +1,70 @@
+   <!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <title>Grisli - demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+
+</head>
+<body>
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+ 
+    var url = "ws://mkala05.ru/parser";
+    var socket = new WebSocket(url);
+    socket.onopen = function() {
+           console.log("Соединение установлено.");
+           socket.send('hello');
+           
+    };
+
+    
+    socket.onmessage = function(event){
+        var data = JSON.parse(event.data);
+
+        var resText = $("#result").text();
+        var infoText = $("#info").text();
+        resText +="<Дата " + data.time_url + ">: ";
+
+        infoText += data.url + "- \n";
+        if (data.success == true){
+           resText += "Успех \n";
+           infoText += "\t Title: " + data.title + " \n \t Encoding: " + data.encoding + "\n"; 
+        }else {
+          resText = "Ошибка \n";
+          infoText +="";
+        }
+
+       $("#result").text(resText);
+       $("#info").text(infoText);
+    };
+});
+
+</script>
+
+<div class="container theme-showcase" role="main">
+  <div class="col-md-12">
+    <h1>Test project</h1>
+    <div class="col-md-4">
+        <textarea class="form-control" id="result"rows="100" cols="250"></textarea>
+    </div>
+    <div class="col-md-8">
+      <textarea class="form-control" id="info" rows="100" cols="250"></textarea>
+    </div>
+  </div>  
+
+
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,5 @@
+<h1>Links</h1>
+
+{%for link in object_list %}
+  <h2><a href="{%url 'detail' link.id %}">{{link}}</a> <b>{{ link.when|date:"d.m.Y" }} {{ link.when|time:"H:i" }}</b></h2>
+{%endfor%}
